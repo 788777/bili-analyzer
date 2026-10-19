@@ -1,0 +1,22 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+dist/
+build/
+*.spec
+!build.spec
+
+# 登录凭据与运行期错误日志，绝对不能提交
+cookie.txt
+cokie.txt
+cookies.txt
+*.cookie
+bili-analyzer-error.log
+bili-analyzer-startup.log
+
+# 启动器（launcher.py / bili-launcher.exe）运行期目录：进程登记与日志
+.launcher/
+
+# 允许提交的启动器打包配置
+!launcher.spec

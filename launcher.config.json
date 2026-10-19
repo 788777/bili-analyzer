@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "project": {
+    "id": "bili-analyzer",
+    "name": {
+      "zh": "bili-analyzer · B站单视频数据分析",
+      "en": "bili-analyzer · Bilibili video analyzer"
+    },
+    "root": "."
+  },
+  "defaults": {
+    "host": "127.0.0.1",
+    "open_browser": true,
+    "port_scan_limit": 50,
+    "stop_timeout_sec": 25
+  },
+  "services": [
+    {
+      "id": "dev",
+      "enabled": true,
+      "name": {
+        "zh": "开发模式（源码 + .venv）",
+        "en": "Dev mode (source + .venv)"
+      },
+      "note": {
+        "zh": "用项目 .venv 里的 Python 直接运行 run.py，改完代码重启即生效。",
+        "en": "Runs run.py with the project .venv interpreter."
+      },
+      "port": 8501,
+      "cwd": ".",
+      "open_browser": true,
+      "require_exists": [".venv/Scripts/python.exe", "run.py", "app/ui.py"],
+      "command": [".venv/Scripts/python.exe", "run.py", "--server.port={port}"],
+      "no_browser_args": ["--server.headless=true"],
+      "env": {
+        "STREAMLIT_BROWSER_GATHER_USAGE_STATS": "false"
+      },
+      "pages": [
+        {
+          "path": "/",
+          "short": { "zh": "主页面", "en": "Main page" },
+          "title": {
+            "zh": "B站视频用户画像分析工具（标签页：📊 分析 ｜ ⚙️ 设置）",
+            "en": "Bilibili video persona analyzer (tabs: Analyze | Settings)"
+          }
+        },
+        {
+          "path": "/_stcore/health",
+          "short": { "zh": "健康检查", "en": "Health" },
+          "title": {
+            "zh": "Streamlit 健康检查接口，返回纯文本 ok",
+            "en": "Streamlit health endpoint (plain text ok)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "packaged",
+      "enabled": true,
+      "name": {
+        "zh": "打包版（独立 exe）",
+        "en": "Packaged build (standalone exe)"
+      },
+      "note": {
+        "zh": "需要先运行 build.bat，生成 dist/bili-analyzer/bili-analyzer.exe。",
+        "en": "Requires dist/bili-analyzer/bili-analyzer.exe (run build.bat first)."
+      },
+      "port": 8502,
+      "cwd": "dist/bili-analyzer",
+      "open_browser": true,
+      "require_exists": ["dist/bili-analyzer/bili-analyzer.exe"],
+      "command": ["{root}/dist/bili-analyzer/bili-analyzer.exe", "--server.port={port}"],
+      "no_browser_args": ["--server.headless=true"],
+      "pages": [
+        {
+          "path": "/",
+          "short": { "zh": "主页面", "en": "Main page" },
+          "title": {
+            "zh": "B站视频用户画像分析工具（标签页：📊 分析 ｜ ⚙️ 设置）",
+            "en": "Bilibili video persona analyzer (tabs: Analyze | Settings)"
+          }
+        },
+        {
+          "path": "/_stcore/health",
+          "short": { "zh": "健康检查", "en": "Health" },
+          "title": {
+            "zh": "Streamlit 健康检查接口，返回纯文本 ok",
+            "en": "Streamlit health endpoint (plain text ok)"
+          }
+        }
+      ]
+    }
+  ]
+}

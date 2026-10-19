@@ -1,0 +1,10 @@
+requests
+pymysql
+python-dotenv
+pandas
+jieba
+snownlp
+scikit-learn
+streamlit
+plotly
+pyinstaller
